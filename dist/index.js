@@ -7,11 +7,31 @@ require('./sourcemap-register.js');module.exports =
 
 const core = __webpack_require__(186);
 
+const acquire = __webpack_require__(286);
+
 (async () => {
   const version = core.getInput('version');
 
-  console.log(`version: ${version}`);
+  try {
+    await acquire(version);
+  } catch (e) {
+    core.setFailed(e);
+  }
 })();
+
+
+/***/ }),
+
+/***/ 286:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const core = __webpack_require__(186);
+
+async function acquire(version) {
+  core.debug(`Acquiring ${version}.`);
+}
+
+module.exports = acquire;
 
 
 /***/ }),
