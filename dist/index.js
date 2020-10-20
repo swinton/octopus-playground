@@ -9,6 +9,12 @@ const core = __webpack_require__(186);
 
 const acquire = __webpack_require__(286);
 
+/*
+https://download.octopusdeploy.com/octopus-tools/7.4.2/OctopusTools.7.4.2.win-x64.zip
+https://download.octopusdeploy.com/octopus-tools/7.4.2/OctopusTools.7.4.2.osx-x64.tar.gz
+https://download.octopusdeploy.com/octopus-tools/7.4.2/OctopusTools.7.4.2.linux-x64.tar.gz
+*/
+
 (async () => {
   const version = core.getInput('version');
 
@@ -25,10 +31,12 @@ const acquire = __webpack_require__(286);
 /***/ 286:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+const os = __webpack_require__(87);
+
 const core = __webpack_require__(186);
 
 async function acquire(version) {
-  core.debug(`Acquiring ${version}.`);
+  core.debug(`Acquiring ${version} for ${os.platform()}.`);
 }
 
 module.exports = acquire;
