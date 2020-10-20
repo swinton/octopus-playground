@@ -9,12 +9,6 @@ const core = __webpack_require__(186);
 
 const acquire = __webpack_require__(286);
 
-/*
-https://download.octopusdeploy.com/octopus-tools/7.4.2/OctopusTools.7.4.2.win-x64.zip
-https://download.octopusdeploy.com/octopus-tools/7.4.2/OctopusTools.7.4.2.osx-x64.tar.gz
-https://download.octopusdeploy.com/octopus-tools/7.4.2/OctopusTools.7.4.2.linux-x64.tar.gz
-*/
-
 (async () => {
   const version = core.getInput('version');
 
@@ -35,8 +29,17 @@ const os = __webpack_require__(87);
 
 const core = __webpack_require__(186);
 
+function downloadURLForPlatform(version) {
+  const platformURLs = new Map();
+  platformURLs.set(`win32`, `https://download.octopusdeploy.com/octopus-tools/${ version }/OctopusTools.${ version }.win-x64.zip`);
+  platformURLs.set(`darwin`, `https://download.octopusdeploy.com/octopus-tools/${ version }/OctopusTools.${ version }.osx-x64.tar.gz`);
+  platformURLs.set(`linux`, `https://download.octopusdeploy.com/octopus-tools/${ version }/OctopusTools.${ version }.linux-x64.tar.gz`);
+  return platformURLs.get(os.platform());
+}
+
 async function acquire(version) {
-  core.debug(`Acquiring ${version} for ${os.platform()}.`);
+  const downloadURL = downloadURLForPlatform(version);
+  core.debug(`Acquiring ${version} for ${os.platform()} via ${downloadURL}.`);
 }
 
 module.exports = acquire;
