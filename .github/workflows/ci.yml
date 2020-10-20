@@ -1,0 +1,23 @@
+name: octopus playground
+
+on:
+  push:
+
+jobs:
+  octpus-playground:
+    name: octpus playground
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, windows-2016, ubuntu-18.04]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Octopus CLI
+      uses: ./
+      with:
+        version: 7.4.2
+
+    # - name: Run Octopus CLI
+    #   run: |
+    #     ./octo version

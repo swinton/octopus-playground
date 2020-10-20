@@ -1,0 +1,21 @@
+{
+  "name": "octopus-playground",
+  "version": "0.0.1",
+  "description": "An Octopus Playground",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run lint && npm run prepare && npm run test"
+  },
+  "keywords": [],
+  "author": "Steve Winton <stevewinton@gmail.com> (https://github.com/swinton)",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/tool-cache": "^1.6.0",
+    "@vercel/ncc": "^0.24.1",
+    "jest": "^26.6.0"
+  }
+}
